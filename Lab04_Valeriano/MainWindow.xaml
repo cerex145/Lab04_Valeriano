@@ -1,0 +1,24 @@
+﻿<Window x:Class="Lab04_Valeriano.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lab04_Valeriano"
+        xmlns:views="clr-namespace:Lab04_Valeriano.Views"
+        mc:Ignorable="d"
+        Title="NeptunoDB - Mantenimiento" Height="600" Width="1000">
+    <TabControl Margin="5">
+        <TabItem Header="Productos">
+            <views:ProductoView/>
+        </TabItem>
+        <TabItem Header="Categorias">
+            <views:CategoriaView/>
+        </TabItem>
+        <TabItem Header="Proveedores">
+            <views:ProveedorView/>
+        </TabItem>
+        <TabItem Header="Pedidos">
+            <views:PedidoView/>
+        </TabItem>
+    </TabControl>
+</Window>

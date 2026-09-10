@@ -1,0 +1,96 @@
+<UserControl x:Class="Lab04_Valeriano.Views.PedidoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:Lab04_Valeriano.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignHeight="500" d:DesignWidth="950">
+    <UserControl.DataContext>
+        <vm:PedidoViewModel/>
+    </UserControl.DataContext>
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <DataGrid Grid.Row="0" ItemsSource="{Binding Pedidos}"
+                      SelectedItem="{Binding PedidoSeleccionado}"
+                      AutoGenerateColumns="False" IsReadOnly="True" Margin="0,0,10,10">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding PedidoID}" Width="50"/>
+                    <DataGridTextColumn Header="ClienteID" Binding="{Binding ClienteID}" Width="80"/>
+                    <DataGridTextColumn Header="Fecha Pedido" Binding="{Binding FechaPedido}" Width="120"/>
+                    <DataGridTextColumn Header="Destinatario" Binding="{Binding Destinatario}" Width="120"/>
+                    <DataGridTextColumn Header="Ciudad Destino" Binding="{Binding CiudadDestino}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="Desde:" VerticalAlignment="Center" Margin="0,0,4,0"/>
+                <DatePicker SelectedDate="{Binding FechaInicio}" Width="120" Margin="0,0,10,0"/>
+                <TextBlock Text="Hasta:" VerticalAlignment="Center" Margin="0,0,4,0"/>
+                <DatePicker SelectedDate="{Binding FechaFin}" Width="120" Margin="0,0,10,0"/>
+                <Button Content="Generar Reporte" Command="{Binding GenerarReporteCommand}"/>
+            </StackPanel>
+
+            <DataGrid Grid.Row="2" ItemsSource="{Binding ReporteDetalle}"
+                      AutoGenerateColumns="False" IsReadOnly="True" Margin="0,0,10,0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="PedidoID" Binding="{Binding PedidoID}" Width="70"/>
+                    <DataGridTextColumn Header="ProductoID" Binding="{Binding ProductoID}" Width="80"/>
+                    <DataGridTextColumn Header="Precio" Binding="{Binding PrecioUnidad}" Width="70"/>
+                    <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}" Width="70"/>
+                    <DataGridTextColumn Header="Descuento" Binding="{Binding Descuento}" Width="70"/>
+                    <DataGridTextColumn Header="Subtotal" Binding="{Binding Subtotal}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <ScrollViewer Grid.Column="1">
+            <StackPanel>
+                <TextBlock Text="ClienteID"/>
+                <TextBox Text="{Binding PedidoSeleccionado.ClienteID, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,8"/>
+
+                <TextBlock Text="EmpleadoID"/>
+                <TextBox Text="{Binding PedidoSeleccionado.EmpleadoID, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,8"/>
+
+                <TextBlock Text="Fecha Pedido"/>
+                <DatePicker SelectedDate="{Binding PedidoSeleccionado.FechaPedido}" Margin="0,0,0,8"/>
+
+                <TextBlock Text="Fecha Requerida"/>
+                <DatePicker SelectedDate="{Binding PedidoSeleccionado.FechaRequerida}" Margin="0,0,0,8"/>
+
+                <TextBlock Text="Fecha Envio"/>
+                <DatePicker SelectedDate="{Binding PedidoSeleccionado.FechaEnvio}" Margin="0,0,0,8"/>
+
+                <TextBlock Text="TransportistaID"/>
+                <TextBox Text="{Binding PedidoSeleccionado.TransportistaID, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,8"/>
+
+                <TextBlock Text="Destinatario"/>
+                <TextBox Text="{Binding PedidoSeleccionado.Destinatario, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,8"/>
+
+                <TextBlock Text="Ciudad Destino"/>
+                <TextBox Text="{Binding PedidoSeleccionado.CiudadDestino, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,8"/>
+
+                <TextBlock Text="Pais Destino"/>
+                <TextBox Text="{Binding PedidoSeleccionado.PaisDestino, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,8"/>
+
+                <UniformGrid Columns="2" Rows="2">
+                    <Button Content="Cargar" Command="{Binding CargarCommand}" Margin="2"/>
+                    <Button Content="Nuevo" Command="{Binding NuevoCommand}" Margin="2"/>
+                    <Button Content="Guardar" Command="{Binding GuardarCommand}" Margin="2"/>
+                    <Button Content="Eliminar" Command="{Binding EliminarCommand}" Margin="2"/>
+                </UniformGrid>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
